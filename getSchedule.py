@@ -21,7 +21,7 @@ def main():
         try:
             browser.find_element_by_class_name(classname)
         except:
-            time.sleep(1)
+            time.sleep(1.5)
             loading(classname)
 
 
