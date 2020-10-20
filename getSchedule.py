@@ -10,10 +10,7 @@ def log(str, *args, wait=False, **kwargs):
         if wait:
             input()
 
-def main():
-
-    browser = webdriver.Chrome(input("drag in your Chrome driver : "))
-    # browser = webdriver.Chrome(executable_path = '/Users/alansmathew/Desktop/getSchedule/chromedriver')
+def main(browser):
 
     # this function is used to wait for certain time to get the page loaded 
     # !note if no connection or page failed to load, after certain recersion the function will quit itself 
@@ -27,26 +24,24 @@ def main():
 
     #LOAD AJCE LOGIN PORTAL
     browser.get('http://www.aesajce.in/')
-    time.sleep(3)
-
     print('Waiting for user to log in')
+
+    #Detect login to continue to daily schedule
     loading('active-sub')
     print('Accessing information')
-    time.sleep(1)
+
+    # Obtain schedule into list/dict
     # browser.get('http://www.aesajce.in/zoomschedule.php')
     # print('done')
     # time.sleep(20)
-
     
-
-    #Detect login to continue to daily schedule
-
-    #Obtain schedule into list/dict
-
     #process data
 
 if __name__=='__main__':
     try:
-        main()
-    except Exception as e: log(e)
-    # finally: browser.quit()
+        browser = webdriver.Chrome(input("drag in your Chrome driver : "))
+        # browser = webdriver.Chrome(executable_path = '/Users/alansmathew/Desktop/getSchedule/chromedriver')
+        main(browser)
+        
+    except Exception as e: log(e, wait=True)
+    finally: browser.quit()
