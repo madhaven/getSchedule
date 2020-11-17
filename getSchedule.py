@@ -16,9 +16,9 @@ def log(str, *args, wait=False, **kwargs):
 
 
 try:
-#    path = input("drag in your Chrome driver : ")
+    path = input("drag in your Chrome driver : ")
 #    path = '/Users/alansmathew/Desktop/< support file /chromedriver'
-    path = 'D:\\SETUPS\\chromedriver.exe'
+#    path = 'D:\\SETUPS\\chromedriver.exe'
     chrome_options = Options()
     chrome_options.add_argument('--log-level=3')
 
@@ -102,7 +102,7 @@ try:
     data = [
         detail[1:-1]+[link]
         for detail, link in zip(details, links)
-	if detail[2][:10] == time.strftime('%d-%m-%Y')[:10]
+	if detail[3][:10] == time.strftime('%d-%m-%Y')[:10]
     ]
 
     browser.close()
