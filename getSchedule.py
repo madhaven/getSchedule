@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import WebDriverException
 
 TESTING = False
 def log(str, *args, wait=False, **kwargs):
@@ -16,9 +17,9 @@ def log(str, *args, wait=False, **kwargs):
 
 
 try:
-    path = input("drag in your Chrome driver : ")
+#    path = input("drag in your Chrome driver : ")
 #    path = '/Users/alansmathew/Desktop/< support file /chromedriver'
-#    path = 'D:\\SETUPS\\chromedriver.exe'
+    path = 'D:\\SETUPS\\chromedriver.exe'
     chrome_options = Options()
     chrome_options.add_argument('--log-level=3')
 
@@ -99,10 +100,13 @@ try:
     ]
 
     log('Cooking Data\n')
+    # for detail, link in zip(details, links):
+    #     print(detail[3][:10], time.strftime('%d-%m-%Y')[:10])
+    # log('data printed', wait=True)
     data = [
         detail[1:-1]+[link]
         for detail, link in zip(details, links)
-	if detail[3][:10] == time.strftime('%d-%m-%Y')[:10]
+        if detail[3][:10] == time.strftime('%d-%m-%Y')[:10]
     ]
 
     browser.close()
@@ -112,6 +116,9 @@ try:
 
 except NoSuchElementException as e:
     print('Looks like this program was made for a different version of AES.')
+    log(e, wait=True)
+except WebDriverException as e:
+    print('Something went wrong with the webdriver\nMake sure it matches your current browser version')
     log(e, wait=True)
 except Exception as e:
     if (str(e) != 'noClassException'):
